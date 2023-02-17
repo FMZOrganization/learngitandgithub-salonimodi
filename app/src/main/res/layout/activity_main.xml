@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/colorBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            tools:layout_editor_absoluteY="16dp" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".MainActivity">
+
+
+        <Switch
+            android:id="@+id/redSwitch"
+            style="@style/RedSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginEnd="38dp"
+            android:checked="true"
+            android:minHeight="60dp"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/redSeekBar"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <SeekBar
+            android:id="@+id/redSeekBar"
+            style="@style/RedSeekBar"
+            android:thumbTint="@color/red"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="13dp"
+            android:scaleY="1"
+            android:scrollbarSize="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/redEditTextNumberDecimal"
+            app:layout_constraintStart_toEndOf="@+id/redSwitch"
+            app:layout_constraintTop_toTopOf="@+id/redSwitch"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/redEditTextNumberDecimal"
+            android:text="0"
+            android:layout_width="150dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toBottomOf="@+id/redSeekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/redSeekBar"
+            app:layout_constraintTop_toTopOf="@+id/redSeekBar"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".MainActivity">
+
+
+        <Switch
+            android:id="@+id/greenSwitch"
+            style="@style/GreenSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginEnd="38dp"
+            android:checked="true"
+            android:minHeight="60dp"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/greenSeekBar"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <SeekBar
+            android:id="@+id/greenSeekBar"
+            style="@style/GreenSeekBar"
+            android:thumbTint="@color/green"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="13dp"
+            android:scaleY="1"
+            android:scrollbarSize="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/greenEditTextNumberDecimal"
+            app:layout_constraintStart_toEndOf="@+id/greenSwitch"
+            app:layout_constraintTop_toTopOf="@+id/greenSwitch"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/greenEditTextNumberDecimal"
+            android:text="0"
+            android:layout_width="150dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toBottomOf="@+id/greenSeekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/greenSeekBar"
+            app:layout_constraintTop_toTopOf="@+id/greenSeekBar"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".MainActivity">
+
+
+        <Switch
+            android:id="@+id/blueSwitch"
+            style="@style/BlueSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginEnd="38dp"
+            android:checked="true"
+            android:minHeight="60dp"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/blueSeekBar"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <SeekBar
+            android:id="@+id/blueSeekBar"
+            style="@style/BlueSeekBar"
+            android:thumbTint="@color/blue"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="13dp"
+            android:scaleY="1"
+            android:scrollbarSize="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/blueEditTextNumberDecimal"
+            app:layout_constraintStart_toEndOf="@+id/blueSwitch"
+            app:layout_constraintTop_toTopOf="@+id/blueSwitch"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/blueEditTextNumberDecimal"
+            android:text="0"
+            android:layout_width="150dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toBottomOf="@+id/blueSeekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/blueSeekBar"
+            app:layout_constraintTop_toTopOf="@+id/blueSeekBar"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset" />
+    </LinearLayout>
+
+
+</LinearLayout>

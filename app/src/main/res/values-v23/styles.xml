@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RedSwitch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumbTint">@color/red</item>
+        <item name="android:showText">false</item>
+        <item name="android:trackTint">@color/light_red</item>
+    </style>
+
+
+    <style name="GreenSwitch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumbTint">@color/green</item>
+        <item name="android:showText">false</item>
+        <item name="android:trackTint">@color/light_green</item>
+    </style>
+
+    <style name="BlueSwitch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumbTint">@color/blue</item>
+        <item name="android:showText">false</item>
+        <item name="android:trackTint">@color/light_blue</item>
+    </style>
+
+</resources>
