@@ -17,6 +17,7 @@ import android.widget.SeekBar
 import android.widget.Switch
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import kotlin.math.roundToInt
 
 @SuppressLint("UseSwitchCompatOrMaterialCode")
 class MainActivity : AppCompatActivity() {
@@ -110,21 +111,36 @@ class MainActivity : AppCompatActivity() {
         }
 
         greenSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                greenSeekBar.progressDrawable.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(this, R.color.green), PorterDuff.Mode.MULTIPLY)
+                greenSwitch.thumbTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.green))
+            } else{
+                greenSeekBar.progressDrawable.colorFilter = null
+                greenSwitch.thumbTintList = null
+            }
             greenSeekBar.isEnabled = isChecked
             greenEditText.isEnabled = isChecked
         }
 
         blueSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                blueSeekBar.progressDrawable.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(this, R.color.blue), PorterDuff.Mode.MULTIPLY)
+                blueSwitch.thumbTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.blue))
+            } else{
+                blueSeekBar.progressDrawable.colorFilter = null
+                blueSwitch.thumbTintList = null
+            }
             blueSeekBar.isEnabled = isChecked
             blueEditText.isEnabled = isChecked
         }
 
         redEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                val input = s.toString().toFloatOrNull() ?: 0f
-                val progress = (input.coerceIn(0f, 1f) * 100).toInt()
-                redSeekBar.progress = progress
-                updateColorBox(colorBox, redSeekBar.progress, greenSeekBar.progress, blueSeekBar.progress )
+                setupEditText(s, blueSeekBar, colorBox)
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -132,10 +148,7 @@ class MainActivity : AppCompatActivity() {
 
         greenEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                val input = s.toString().toFloatOrNull() ?: 0f
-                val progress = (input.coerceIn(0f, 1f) * 100).toInt()
-                greenSeekBar.progress = progress
-                updateColorBox(colorBox, redSeekBar.progress, greenSeekBar.progress, blueSeekBar.progress )
+                setupEditText(s, blueSeekBar, colorBox)
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -143,14 +156,12 @@ class MainActivity : AppCompatActivity() {
 
         blueEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                val input = s.toString().toFloatOrNull() ?: 0f
-                val progress = (input.coerceIn(0f, 1f) * 100).toInt()
-                blueSeekBar.progress = progress
-                updateColorBox(colorBox, redSeekBar.progress, greenSeekBar.progress, blueSeekBar.progress )
+                setupEditText(s, blueSeekBar, colorBox)
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
 
         resetButton.setOnClickListener {
             redSeekBar.progress = 0
@@ -159,13 +170,29 @@ class MainActivity : AppCompatActivity() {
             redEditText.setText("0")
             blueEditText.setText("0")
             greenEditText.setText("0")
+            redSwitch.isEnabled = true
+            greenSwitch.isEnabled = true
+            blueSwitch.isEnabled = true
             updateColorBox(colorBox, 0, 0, 0)
         }
 
     }
 
-    fun updateColorBox(colorBox: View, redProgress: Int, greenProgress2: Int, blueProgress: Int) {
-        val color = Color.rgb(redProgress, greenProgress2, blueProgress, )
+    fun updateColorBox(colorBox: View, redProgress: Int, greenProgress: Int, blueProgress: Int) {
+        val red = (redProgress / 100.0f).coerceIn(0.0f, 1.0f)
+        val green = (greenProgress / 100.0f).coerceIn(0.0f, 1.0f)
+        val blue = (blueProgress / 100.0f).coerceIn(0.0f, 1.0f)
+
+        val color = Color.rgb((red * 255).toInt(), (green * 255).toInt(), (blue * 255).toInt())
         colorBox.setBackgroundColor(color)
     }
+
+    fun setupEditText(input: CharSequence?, seekBar: SeekBar, colorBox: View) {
+        val value = input?.toString()?.toFloatOrNull() ?: 0f
+        val progress = (value.coerceIn(0f, 1f) * 100 + 0.5f).toInt().coerceAtLeast(1)
+        seekBar.progress = progress
+        updateColorBox(colorBox, redSeekBar.progress, greenSeekBar.progress, blueSeekBar.progress)
+    }
+
+
 }
