@@ -97,50 +97,20 @@ class MainActivity : AppCompatActivity() {
         })
 
         redSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                redSeekBar.progressDrawable.colorFilter = PorterDuffColorFilter(
-                    ContextCompat.getColor(this, R.color.red), PorterDuff.Mode.MULTIPLY)
-                redSwitch.thumbTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(this, R.color.red))
-            } else{
-                redSeekBar.progressDrawable.colorFilter = null
-                redSwitch.thumbTintList = null
-            }
-            redSeekBar.isEnabled = isChecked
-            redEditText.isEnabled = isChecked
+            setColorSwitchListener(redSwitch, redSeekBar, redEditText, R.color.red,isChecked )
         }
 
         greenSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                greenSeekBar.progressDrawable.colorFilter = PorterDuffColorFilter(
-                    ContextCompat.getColor(this, R.color.green), PorterDuff.Mode.MULTIPLY)
-                greenSwitch.thumbTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(this, R.color.green))
-            } else{
-                greenSeekBar.progressDrawable.colorFilter = null
-                greenSwitch.thumbTintList = null
-            }
-            greenSeekBar.isEnabled = isChecked
-            greenEditText.isEnabled = isChecked
+            setColorSwitchListener(greenSwitch, greenSeekBar, greenEditText, R.color.green, isChecked )
         }
 
         blueSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                blueSeekBar.progressDrawable.colorFilter = PorterDuffColorFilter(
-                    ContextCompat.getColor(this, R.color.blue), PorterDuff.Mode.MULTIPLY)
-                blueSwitch.thumbTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(this, R.color.blue))
-            } else{
-                blueSeekBar.progressDrawable.colorFilter = null
-                blueSwitch.thumbTintList = null
-            }
-            blueSeekBar.isEnabled = isChecked
-            blueEditText.isEnabled = isChecked
+            setColorSwitchListener(blueSwitch, blueSeekBar, blueEditText, R.color.blue,isChecked )
         }
 
         redEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                setupEditText(s, blueSeekBar, colorBox)
+                setupEditText(s, redSeekBar, colorBox)
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -148,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
         greenEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                setupEditText(s, blueSeekBar, colorBox)
+                setupEditText(s, greenSeekBar, colorBox)
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -170,9 +140,9 @@ class MainActivity : AppCompatActivity() {
             redEditText.setText("0")
             blueEditText.setText("0")
             greenEditText.setText("0")
-            redSwitch.isEnabled = true
-            greenSwitch.isEnabled = true
-            blueSwitch.isEnabled = true
+            redSwitch.isChecked = true
+            greenSwitch.isChecked = true
+            blueSwitch.isChecked = true
             updateColorBox(colorBox, 0, 0, 0)
         }
 
@@ -193,6 +163,28 @@ class MainActivity : AppCompatActivity() {
         seekBar.progress = progress
         updateColorBox(colorBox, redSeekBar.progress, greenSeekBar.progress, blueSeekBar.progress)
     }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun setColorSwitchListener(
+        switch: Switch,
+        seekBar: SeekBar,
+        editText: EditText,
+        color: Int,
+        isChecked: Boolean
+    ) {
+            if (isChecked) {
+                seekBar.progressDrawable.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(this, color), PorterDuff.Mode.MULTIPLY
+                )
+                switch.thumbTintList = ColorStateList.valueOf(ContextCompat.getColor(this, color))
+            } else {
+                seekBar.progressDrawable.colorFilter = null
+                switch.thumbTintList = null
+            }
+            seekBar.isEnabled = isChecked
+            editText.isEnabled = isChecked
+    }
+
 
 
 }
